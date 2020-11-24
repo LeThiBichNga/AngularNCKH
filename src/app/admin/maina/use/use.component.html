@@ -1,0 +1,84 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">user</h1>
+    <p class="mb-4">Quản lý danh sách user</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 row">
+            <h6 class="col-sm-10 m-0 font-weight-bold text-primary">Danh sách</h6>
+            <div class="col-dm-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i> Thêm </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tài khoản</th>
+                            <th>Mật khẩu</th>
+                            <th>Mã role</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tài khoản</th>
+                            <th>Mật khẩu</th>
+                            <th>Mã role</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let us of item.result; let i = index;">
+                            <th>{{i+1}}</th>
+                            <td>{{us.taikhoan}}</td>
+                            <td>{{us.matkhau}}</td>
+                            <td>{{us.idrole}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="edit(us.id)"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm" (click)="delete_(us.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin user</h5>
+                <button type="button" id="closeModel" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tài khoản</label>
+                    <input type="text" value="{{taikhoan}}" #tk class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mật khẩu</label>
+                    <input type="text" value="{{matkhau}}" #mk class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Mã role</label>
+                    <input type="text" value="{{idrole}}" #idr class="form-control" id="exampleInputEmail1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" (click)="exec(tk.value,mk.value,idr.value)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

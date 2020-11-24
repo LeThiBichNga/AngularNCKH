@@ -1,0 +1,88 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Chức vụ</h1>
+    <p class="mb-4">Quản lý danh sách chức vụ</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 row">
+            <h6 class="col-sm-10 m-0 font-weight-bold text-primary">Danh sách</h6>
+            <div class="col-dm-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i> Thêm </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên chức vụ</th>
+                            <th>Điều kiện</th>
+                            <th>Định mức</th>
+                            <th>Ghi chú</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Tên chức vụ</th>
+                            <th>Điều kiện</th>
+                            <th>Định mức</th>
+                            <th>Ghi chú</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let dv of item">
+                            <td>{{dv.tenchucvu}}</td>
+                            <td>{{dv.dieukien}}</td>
+                            <td>{{dv.dinhmuc}}</td>
+                            <td>{{dv.ghichu}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="edit(dv.madonvi)"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm" (click)="delete_(dv.madonvi)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin chức vụ</h5>
+                <button type="button" id="closeModel" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên chức vụ</label>
+                    <input type="text" value="{{tenchucvu}}" #dv class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Điều kiện</label>
+                    <input type="text" value="{{dieukien}}" #tl class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Định mức</label>
+                    <input type="text" value="{{dinhmuc}}" #gc class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">ghi chú</label>
+                    <input type="text" value="{{ghichu}}" #gc class="form-control" id="exampleInputEmail1">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" (click)="exec(dv.value,tl.value,gc.value)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

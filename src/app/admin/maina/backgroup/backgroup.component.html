@@ -1,0 +1,68 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Lĩnh vực</h1>
+    <p class="mb-4">Quản lý danh sách lĩnh vực</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 row">
+            <h6 class="col-sm-10 m-0 font-weight-bold text-primary">Danh sách</h6>
+            <div class="col-dm-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i> Thêm </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên Lĩnh vực</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Tên lĩnh vực</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let lv of itt.result">
+                            <td>{{lv.tenlinhvuc}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="edit(lv.id)"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-primary btn-sm" (click)="delete_(lv.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin lĩnh vực</h5>
+                <button type="button" id="closeModel" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tên lĩnh vực</label>
+                    <input type="text" value="{{linhvuc}}" #tenlv class="form-control" id="exampleInputEmail1">
+                </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" (click)="exec(tenlv.value)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,104 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tin tức</h1>
+    <p class="mb-4">Quản lý danh sách tin tức</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 row">
+            <h6 class="col-sm-10 m-0 font-weight-bold text-primary">Danh sách</h6>
+            <div class="col-dm-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i> Thêm </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <ng-container>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tiêu đề</th>
+                                <th>Hình ảnh</th>
+                                <th>Mã loại tin tức</th>
+                                <th>Ngày đăng</th>
+                                <th>Lượt xem</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tiêu đề</th>
+                                <th>Hình ảnh</th>
+                                <th>Mã loại tin tức</th>
+                                <th>Ngày đăng</th>
+                                <th>Lượt xem</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr *ngFor="let dv of item.result; let i = index;">
+                                <th>{{i+1}}</th>
+                                <td>{{dv.tieude}}</td>
+                                <td><img src="../../../../assets/images/news/{{dv.hinhanh}}" style="width: 50px; height: 50px;"></td>
+                                <td>{{dv.tenloaitt}}</td>
+                                <td>{{dv.ngaydang | date:"dd/MM/yyyy"}}</td>
+                                <td>{{dv.luotem}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="edit(dv.id)"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-primary btn-sm" (click)="delete_(dv.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin tin tức</h5>
+                <button type="button" #closebutton id="closeModel" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txtloaitintuc">Tiêu đề</label>
+                    <input type="text" value="{{tieude}} " #td class="form-control " id="txtloaitintuc">
+                </div>
+                <div class="form-group">
+                    <label for="txthinhanh">Hình ảnh</label>
+                    <input type="file" class="form-control-file" (change)="onimg($event)" #ha id="txthinhanh">
+                </div>
+                <div class="form-group">
+                    <label for="txtloaitintuc">Loại tin tức</label>
+                    <select #ltt class="form-control">
+                        <ng-container *ngFor="let it of itemloai">
+                            <option [selected]="loaitintuc==it.id" value="{{it.id}}">{{it.tenloaitt}}</option>
+                        </ng-container>                       
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="txtloaitintuc">Ngày đăng</label>
+                    <input type="text" value="{{ngaydang}} " #nd class="form-control " id="txtloaitintuc">
+                </div>
+                <div class="form-group">
+                    <label for="txtloaitintuc">Nội dung</label>
+                    <ckeditor #myEditor [(ngModel)]="ckeditorContent" [config]="{uiColor: '#a4a4a4'}" debounce="500"> </ckeditor>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-secondary " data-dismiss="modal ">Đóng</button>
+                <button type="button " class="btn btn-primary " (click)="exec(td.value,nd.value,ltt.value)">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

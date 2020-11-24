@@ -1,0 +1,74 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Loại tin tức</h1>
+    <p class="mb-4">Quản lý danh sách loại tin tức</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 row">
+            <h6 class="col-sm-10 m-0 font-weight-bold text-primary">Danh sách</h6>
+            <div class="col-dm-2">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="create()"><i class="fa fa-plus" aria-hidden="true"></i> Thêm </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Tên loại tin tức</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Tên loại tin tức</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <ng-container>
+                            <tr *ngFor="let dv of item">
+                                <td>{{dv.tenloaitt}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="edit(dv.id)"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-primary btn-sm" (click)="delete_(dv.id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                        <!-- <ng-container *ngIf="item.length==0">
+                            <tr>
+                                <td colspan="2" class="text-center">Danh sách rỗng</td>
+                            </tr>
+                        </ng-container> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin loại tin tức</h5>
+                <button type="button" #closebutton id="closeModel" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="txtloaitintuc">Tên loại tin tức</label>
+                    <input type="text" value="{{tenloai}} " #ltt class="form-control " id="txtloaitintuc">
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-secondary " data-dismiss="modal ">Đóng</button>
+                <button type="button " class="btn btn-primary " (click)="exec(ltt.value) ">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
